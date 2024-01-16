@@ -1,3 +1,5 @@
 export * from './App';
 export * from './StartMenu';
-export * from './BattleMenu';
+export * from './Battle';
+export * from './HealthBar';
+export * from './PlayerSummary';
