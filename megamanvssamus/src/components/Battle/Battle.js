@@ -1,10 +1,12 @@
 import { PlayerSummary } from 'components/PlayerSummary';
 import styles from './styles.module.css';
+import { useEffect, useState } from 'react';
 import { opponentStats, playerStats } from 'shared/characters';
 
 export const Battle = () => {
-
-  const [opponentHealth, setOpponnentHealth] = useState(opponentStats.maxHealth);
+  const [opponentHealth, setOpponnentHealth] = useState(
+    opponentStats.maxHealth,
+  );
   const [playerHealth, setPlayerHealth] = useState(playerStats.maxHealth);
 
   return (
@@ -12,17 +14,23 @@ export const Battle = () => {
       <div className={styles.opponent}>
         <div className={styles.summary}>
           <PlayerSummary
-            health={opponentStats.health}
+            health={opponentHealth}
             name={opponentStats.name}
-            health={opponentStats.heal}
-            health={opponentStats.health}
+            maxHealth={opponentStats.maxHealth}
+            level={opponentStats.level}
           />
         </div>
       </div>
 
       <div className={styles.user}>
         <div className={styles.summary}>
-          <PlayerSummary main />
+          <PlayerSummary
+            main={true}
+            health={playerHealth}
+            name={playerStats.name}
+            maxHealth={playerStats.maxHealth}
+            level={playerStats.level}
+          />
         </div>
       </div>
     </div>
