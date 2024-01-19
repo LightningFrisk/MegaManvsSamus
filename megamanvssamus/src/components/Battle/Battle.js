@@ -30,7 +30,7 @@ export const Battle = () => {
             name={playerStats.name}
             maxHealth={playerStats.maxHealth}
             level={playerStats.level}
-          />
+          /> //player summary done
         </div>
       </div>
     </div>
