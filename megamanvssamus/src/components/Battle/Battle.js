@@ -1,4 +1,4 @@
-import { PlayerSummary } from 'components/PlayerSummary';
+import { PlayerSummary, BattleMenu } from 'components';
 import styles from './styles.module.css';
 import { useEffect, useState } from 'react';
 import { opponentStats, playerStats } from 'shared/characters';
@@ -30,8 +30,15 @@ export const Battle = () => {
             name={playerStats.name}
             maxHealth={playerStats.maxHealth}
             level={playerStats.level}
-          /> //player summary done
+          />
         </div>
+      </div>
+      <div>
+        <BattleMenu
+          onAttack={() => console.log('Attack')}
+          onHeal={() => console.log('Heal')}
+          onMagic={() => console.log('Magic')}
+        />
       </div>
     </div>
   );

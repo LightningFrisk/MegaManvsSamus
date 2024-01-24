@@ -1,3 +1,17 @@
-export const BattleMenu = () => {
-  return 'Hello World';
+import styles from './styles.module.css';
+
+export const BattleMenu = ({ onAttack, onMagic, onHeal }) => {
+  return (
+    <div className={styles.main}>
+      <div onClick={onAttack} className={styles.option}>
+        Attack
+      </div>
+      <div onClick={onHeal} className={styles.option}>
+        Heal
+      </div>
+      <div onClick={onMagic} className={styles.option}>
+        Magic
+      </div>
+    </div>
+  );
 };
