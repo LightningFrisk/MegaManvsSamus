@@ -1,7 +1,7 @@
 import { PlayerSummary, BattleMenu, BattleAnnouncer } from 'components';
 import styles from './styles.module.css';
 import { useEffect, useState } from 'react';
-import { opponentStats, playerStats } from 'shared/characters';
+import { opponentStats, playerStats, wait } from 'shared';
 import { useBattleSequence } from 'hooks/useBattleSequence';
 import { useAIOpponent } from 'hooks';
 
@@ -26,7 +26,7 @@ export const Battle = () => {
     opponentAnimation,
   } = useBattleSequence(sequence);
 
-  const aiChoice = useAIOpponent(turn);
+  let aiChoice = useAIOpponent(turn);
 
   useEffect(() => {
     //this sets the sequence with a random AI choice so the AI will actually do stuff
@@ -34,6 +34,15 @@ export const Battle = () => {
       setSequence({ turn, mode: aiChoice });
     }
   }, [turn, aiChoice, inSequence]);
+
+  // useEffect(() => {
+  //   if (playerHealth === 0 || opponentHealth === 0) {
+  //     (async () => {
+  //       await wait(1000);
+  //       onGameEnd(playerHealth === 0 ? opponentStats : playerStats);
+  //     })();
+  //   }
+  // }, [playerHealth, opponentHealth, onGameEnd]);
 
   return (
     <>
@@ -89,14 +98,15 @@ export const Battle = () => {
               }
             />
           </div>
-
-          <div className={styles.hudChild}>
-            <BattleMenu
-              onAttack={() => setSequence({ turn, mode: 'attack' })}
-              onHeal={() => setSequence({ turn, mode: 'heal' })}
-              onMagic={() => setSequence({ turn, mode: 'magic' })}
-            />
-          </div>
+          {!inSequence && turn === 0 && (
+            <div className={styles.hudChild}>
+              <BattleMenu
+                onAttack={() => setSequence({ turn, mode: 'attack' })}
+                onHeal={() => setSequence({ turn, mode: 'heal' })}
+                onMagic={() => setSequence({ turn, mode: 'magic' })}
+              />
+            </div>
+          )}
         </div>
       </div>
     </>
